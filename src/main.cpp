@@ -66,6 +66,10 @@ void load(Persona& persona){
 
 
 int main(){
+    Persona p1("Luis",23,1);
+    Persona p2("Christofer",19,2);
+    Persona p3("Deyner",43,3);
+    Persona p4("Maikol",45,4);
 
 
 
