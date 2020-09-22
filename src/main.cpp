@@ -7,7 +7,6 @@
 #include <vector>
 using namespace std;
 
-
 struct Persona {
     char nombre[20];
     int edad;
@@ -24,7 +23,6 @@ void save(Persona persona){
     ofstream archivo;
     //se crea una variable ofstream para poder usar los metodos necesarios para escribir en un archivo como .open, .write , .close ,...
 
-
     archivo.open("ArchivoBinario.dat",ios::app | ios::binary);
     //se abre o se crea el archivo "ArchivoBinario.dat" y se decide en que modo se abrira ese archivo y por ultimo se le recuerda a C++ que es un archivo binario
 
@@ -37,11 +35,9 @@ void save(Persona persona){
     //esta el metodo que se usa para escribir en el archivo binario
     //se le pasan  dos paramentros, primero la direccion del objeto,struct,variable que se va "almacenar" y segundo el tamanno de este objeto,struct o variable
 
-
     archivo.close();
     //por ultimo se cierra el archivo
 }
-
 
 void load(Persona& persona){
     ifstream archivo;
@@ -63,7 +59,32 @@ void load(Persona& persona){
     //se cerro el archivo
 }
 
+void ejemploSeekgYTellg(){
+    ifstream archivo;
 
+    archivo.open("ArchivoBinario.dat",ios::in | ios::binary);
+    //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
+
+    if(archivo.fail()){
+        cout<<"no se pudo abrir el archivo";
+        exit(1);
+    }
+    //si el archivo no se pudo abrir o algo mas paso el metodo fail() retorna un 1 si algo malo paso y con el exit(1) nos salimos del metodo
+
+    Persona persona;
+
+    //por ejemplo queremos mostrar la tercera persona que fuen ingresado en el archivo
+    archivo.seekg(2*sizeof(Persona));
+    //ya que C++ utiliza lo que son direccion fisicas lo cual quiere decir que se recorre el archivo byte a byte
+    //por ese motivo hay multiplicarle el sizeof(Persona) para ubicarnos en la tercera persona
+    //lo multiplicamos por 2 ya que la primera persona es el registro 0, la segunda el 1, la tercera el 2,...
+
+    archivo.read((char *)&persona,sizeof(Persona));
+    cout<<persona.nombre<<" "<<persona.edad<<" "<<persona.id<<endl;
+    cout<<archivo.tellg();
+    archivo.close();
+    //se cerro el archivo
+}
 
 int main(){
 
