@@ -71,7 +71,10 @@ int main(){
     Persona p3("Deyner",43,3);
     Persona p4("Maikol",45,4);
 
-
+    save(p1);
+    save(p2);
+    save(p3);
+    save(p4);
 
     return 0;
 };
