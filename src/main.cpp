@@ -96,9 +96,13 @@ int main(){
     save(p3);
     save(p4);
 
-
-
-
+    Persona aux;
+    load(aux);
+    cout<<aux.id<<endl;
+    cout<<endl;
+    ejemploSeekgYTellg(aux);
+    cout<<endl;
+    cout<<aux.nombre<<" "<<aux.edad<<endl;
 
     return 0;
 };
