@@ -59,7 +59,7 @@ void load(Persona& persona){
     //se cerro el archivo
 }
 
-void ejemploSeekgYTellg(){
+void ejemploSeekgYTellg(Persona& persona){
     ifstream archivo;
 
     archivo.open("ArchivoBinario.dat",ios::in | ios::binary);
@@ -71,8 +71,6 @@ void ejemploSeekgYTellg(){
     }
     //si el archivo no se pudo abrir o algo mas paso el metodo fail() retorna un 1 si algo malo paso y con el exit(1) nos salimos del metodo
 
-    Persona persona;
-
     //por ejemplo queremos mostrar la tercera persona que fuen ingresado en el archivo
     archivo.seekg(2*sizeof(Persona));
     //ya que C++ utiliza lo que son direccion fisicas lo cual quiere decir que se recorre el archivo byte a byte
@@ -80,8 +78,9 @@ void ejemploSeekgYTellg(){
     //lo multiplicamos por 2 ya que la primera persona es el registro 0, la segunda el 1, la tercera el 2,...
 
     archivo.read((char *)&persona,sizeof(Persona));
-    cout<<persona.nombre<<" "<<persona.edad<<" "<<persona.id<<endl;
-    cout<<archivo.tellg();
+    cout<<"La lectura del archivo quedó en el byte: "<<archivo.tellg();
+
+
     archivo.close();
     //se cerro el archivo
 }
