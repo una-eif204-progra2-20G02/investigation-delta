@@ -88,12 +88,28 @@ void ejemploSeekgYTellg(Persona &persona) {
 
 void guardar(Persona persona) {
     ofstream archivo;
-    try { archivo.open("ArchivoTexto.txt", ios::app); }
+    try { archivo.open("ArchivoTexto.txt", ios::out); }
     catch (std::ifstream::failure a) {
         cout << "no se pudo abrir el archivo";
         exit(1);
     }
     archivo << persona.nombre << ", " << persona.edad << ", " << persona.id << endl;
+    archivo.close();
+}
+
+void leer() {
+    ifstream archivo;
+    string texto;
+    try { archivo.open("ArchivoTexto.txt", ios::in); }
+    catch (std::ifstream::failure a) {
+        cout << "no se pudo abrir el archivo";
+        exit(1);
+    }
+    cout << endl;
+    while (!archivo.eof()) {
+        getline(archivo, texto);
+        cout << texto << endl;
+    }
     archivo.close();
 }
 
@@ -118,10 +134,13 @@ int main() {
     save(p4);
 
     //Archivo de texto
-    guardar(p1);
+    /*guardar(p1);
     guardar(p2);
     guardar(p3);
-    guardar(p4);
+    guardar(p4);*/
+
+    //Leer archivo de texto
+    leer();
 
     return 0;
 };
