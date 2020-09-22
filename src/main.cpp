@@ -65,7 +65,7 @@ void load(Persona& persona){
 
 
 
-int maim{
+int main(){
 
 
 
