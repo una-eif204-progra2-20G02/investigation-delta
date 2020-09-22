@@ -26,13 +26,10 @@ void save(Persona persona) {
     ofstream archivo;
     //se crea una variable ofstream para poder usar los metodos necesarios para escribir en un archivo como .open, .write , .close ,...
 
-    archivo.open("ArchivoBinario.dat", ios::app | ios::binary);
-    //se abre o se crea el archivo "ArchivoBinario.dat" y se decide en que modo se abrira ese archivo y por ultimo se le recuerda a C++ que es un archivo binario
+    try { archivo.open("ArchivoBinario.dat", ios::app | ios::binary); }
+        //se abre o se crea el archivo "ArchivoBinario.dat" y se decide en que modo se abrira ese archivo y por ultimo se le recuerda a C++ que es un archivo binario
 
-    if (archivo.fail()) {
-        cout << "no se pudo abrir el archivo";
-        exit(1);
-    }
+    catch (std::exception) { cout << "no se pudo abrir el archivo"; }
     //si el archivo no se pudo abrir o algo mas paso el metodo fail() retorna un 1 si algo malo paso y con el exit(1) nos salimos del metodo
 
     archivo.write((char *) &persona, sizeof(Persona));
@@ -47,10 +44,10 @@ void load(Persona &persona) {
     ifstream archivo;
     //se crea una variable ifstream para poder usar los metodos necesarios para leer el archivo como .open, .read , .close ,...
 
-    archivo.open("ArchivoBinario.dat", ios::in | ios::binary);
-    //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
+    try { archivo.open("ArchivoBinario.dat", ios::in | ios::binary); }
+        //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
 
-    if (archivo.fail()) {
+    catch (std::exception) {
         cout << "no se pudo abrir el archivo";
         exit(1);
     }
@@ -66,10 +63,10 @@ void load(Persona &persona) {
 void ejemploSeekgYTellg(Persona &persona) {
     ifstream archivo;
 
-    archivo.open("ArchivoBinario.dat", ios::in | ios::binary);
-    //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
+    try { archivo.open("ArchivoBinario.dat", ios::in | ios::binary); }
+        //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
 
-    if (archivo.fail()) {
+    catch (std::exception) {
         cout << "no se pudo abrir el archivo";
         exit(1);
     }
@@ -91,9 +88,10 @@ void ejemploSeekgYTellg(Persona &persona) {
 
 void guardar(Persona persona) {
     ofstream archivo;
-    archivo.open("ArchivoTexto.txt", ios::app);
-    if (archivo.fail()) {
-        cout << "Error al crear archivo";
+    try { archivo.open("ArchivoTexto.txt", ios::app); }
+    catch (std::exception) {
+        cout << "no se pudo abrir el archivo";
+        exit(1);
     }
     archivo << persona.nombre << ", " << persona.edad << ", " << persona.id << endl;
     archivo.close();
