@@ -78,7 +78,7 @@ void ejemploSeekgYTellg(Persona& persona){
     //lo multiplicamos por 2 ya que la primera persona es el registro 0, la segunda el 1, la tercera el 2,...
 
     archivo.read((char *)&persona,sizeof(Persona));
-    cout<<"La lectura del archivo quedó en el byte: "<<archivo.tellg();
+    cout<<"La lectura del archivo quedo en el byte: "<<archivo.tellg();
 
 
     archivo.close();
@@ -95,6 +95,10 @@ int main(){
     save(p2);
     save(p3);
     save(p4);
+
+
+
+
 
     return 0;
 };
