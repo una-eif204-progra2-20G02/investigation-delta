@@ -43,6 +43,27 @@ void save(Persona persona){
 }
 
 
+void load(Persona& persona){
+    ifstream archivo;
+    //se crea una variable ifstream para poder usar los metodos necesarios para leer el archivo como .open, .read , .close ,...
+
+    archivo.open("ArchivoBinario.dat",ios::in | ios::binary);
+    //carga el archivo, se decide en que modo se va a abrir ese archivo( en este caso en modo lectura) y se le recuerda a C++ que es un archivo binario
+
+    if(archivo.fail()){
+        cout<<"no se pudo abrir el archivo";
+        exit(1);
+    }
+    //si el archivo no se pudo abrir o algo mas paso el metodo fail() retorna un 1 si algo malo paso y con el exit(1) nos salimos del metodo
+
+    archivo.read((char *)&persona, sizeof(Persona));
+    //lo que esta en el archivo se va a cargar en la persona
+
+    archivo.close();
+    //se cerro el archivo
+}
+
+
 
 int maim{
 
